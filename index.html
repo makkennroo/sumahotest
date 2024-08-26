@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trigger Unity Effect</title>
+</head>
+<body>
+  <h1>Unity Effect Trigger</h1>
+  <button id="triggerBtn">Fireworks!</button>
+
+  <script>
+    document.getElementById('triggerBtn').addEventListener('click', () => {
+        fetch('https://192.168.11.8:3000/trigger', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ effect: 'triggered' }),
+})
+      .then(response => {
+        if (response.ok) {
+          alert('Effect triggered!');
+        } else {
+          alert('Failed to trigger effect.');
+        }
+      })
+      .catch(error => {
+        alert('Error: ' + error.message);
+      });
+    });
+  </script>
+</body>
+</html>
